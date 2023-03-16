@@ -35,4 +35,3 @@ chart3 <- ggplot(values_chart_3, aes(x = Month, y = total_checkouts, fill = Usag
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Total Checkouts by Month and Usage Class in 2020",
        x = "Month", y = "Total Checkouts", fill = "Item Type")
-
