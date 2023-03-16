@@ -1,86 +1,141 @@
 ---
-title: "A3: SPL Library Checkouts"
-output: html_document
+title: 'A3: SPL Library Checkouts'
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ### Introduction
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+For this assignment I chose to analyze the patterns in library checkouts of digital items and compare them to checkouts of physical items. I selected the data only for material types: "BOOK", "EBOOK", AND "BOOK, ER"; because I was interested if and how the Covid-19 pandemic affected library checkouts of books. My theory is that because of the lockdown people had more free time and some might have chosen to rent books form the library. I wanted to see if this increased the overall number of book checkouts, as well as of ebooks - digital items. I selected the data from 2018 to 2023 to see how the patterns might change over time.
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+The first step of analysing this dataset is looking at a few summary statistics. I found that the average number of checkouts for digital items was higher than for physical items, with an average score of 12.44 and 11.28 respectively. 
 
-These will likely be calculated using your DPLYR skills, answering questions such as:
+Next, I wanted to see how this number changes before, after, and during lockdown. Therefore, I grouped the data by year and for both items I calculated the average checkouts. However, the data is from 2018 to 2023, therefore the 'before_lockdown' average includes dates from December 2019 (inclusive) to March 2020 (exclusive), 'during_lockdown' from March 2020 (inclusive) to June 2020 (exclusive), and 'after_lockdown' from June 2020 (inclusive) to September 2020 (exclusive). The results presented below show that the average number of library checkouts decreased slightly for digital ebooks but more significantly for physical books, as there was a drop from 11 to 9 checkouts during lockdown, and an even further drop from 9 to 7 after lockdown.
 
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
+I wanted to further explore this phenomenon by looking at the year and month of that year with the most checkouts for ebooks. The results show that it was January 2021 and that in total there were 153361 ebook checkouts. This, however, doesn't tell us much in relation to the lockdown. 
 
-Feel free to calculate and report values that you find relevant.
+Next, I wanted to see what were the three most popular titles to be checked out, and whether they were an ebook or a physical book. The most popular title was 'Educated: A Memoir' with a total of 17936 checkouts, the second was 'Where the Crawdads Sing', and third was 'Becoming'. All three were ebooks.
+
+Finally, I wanted to see what were the three most popular titles before, during, and after the pandemic and compare that to the overall most popular titles. I grouped the data and years in the same way as for question 2. The most popular title before and during lockdown was 'Becoming' and at both times they were ebooks. The most interesting was the fact that the second and third mostn popular titles were physical books before lockdown, but during and after lockdown those changed to ebooks. This suggests that physical books became less popular after lockdown. Furthermore, when we look at the titles of the three most popular items after lockdown we can find that they all concern race: white fragility, white supremacy and being antiracist. This might be because the time period of the 'after_lockdown' date filter falls during the rise of the Black Lives Matter movement.
+
+1. What is the average number of checkouts for each item (digital vs physical)?
+Digital: 12.441812
+Physical: 11.28414
+
+2. What is the average number of checkouts for each item (digital vs physical) before, during and after lockdown?
+Checkouts Before lockdown:
+- Digital: 13.01581
+- Physical: 11.69532
+
+Checkouts During lockdown:
+- Digital: 12.381955
+- Physical: 9.240016
+
+Checkouts After lockdown:
+- Digital: 12.584321
+- Physical: 7.367816
+
+3. What is the year and month of that year with the most checkouts for ebooks?
+- CheckoutYear: 2021
+- CheckoutMonth: 1
+- total_checkouts: 153361
+
+4. What were the top 3 most popular titles to be checked out? 
+1st
+- Title: Educated: A Memoir
+- MaterialType: EBOOK
+- total_checkouts: 17936
+
+2nd
+- Title: Where the Crawdads Sing
+- MaterialType: EBOOK
+- total_checkouts: 15564
+
+3rd
+- Title: Becoming
+- MaterialType: EBOOK
+- total_checkouts: 13418
+
+
+5. What was the most popular title before, during, after lockdown?
+Before lockdown:
+  1st
+  - Title: Becoming
+  - MaterialType: EBOOK
+  - total_checkouts: 1808
+  2nd
+  - Title: The Dutch house : a novel / Ann Patchett.
+  - MaterialType: BOOK
+  - total_checkouts: 1804
+  3rd
+  - Title: Where the crawdads sing / Delia Owens.
+  - MaterialType: BOOK
+  - total_checkouts: 1756
+  
+During lockdown:
+  1st
+  - Title: Becoming
+  - MaterialType: EBOOK
+  - total_checkouts: 1781
+  2nd
+  - Title: There There: A Novel
+  - MaterialType: EBOOK
+  - total_checkouts: 1565
+  3rd
+  - Title: Educated: A Memoir
+  - MaterialType: EBOOK
+  - total_checkouts: 1464
+
+After lockdown:
+  1st
+  - Title: White Fragility: Why It's So Hard for White People to Talk About Racism
+  - MaterialType: EBOOK
+  - total_checkouts: 3316
+  2nd
+  - Title: Me and White Supremacy: Combat Racism, Change the World, and Become a Good Ancestor
+  - MaterialType: EBOOK
+  - total_checkouts: 2831
+  3rd
+  - Title: How to Be an Antiracist
+  - MaterialType: EBOOK
+  - total_checkouts: 2640
+
 
 ### The Dataset
 
-- Who collected/published the data?  
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
-- What are possible limitations or problems with this data?   (at least 200 words)
+The data comes from the Seattle Public Library which is available on data.seattle.gov which is a part of Seattle's Open Data initiative. The dataset begins with checkouts that occurred in April 2005 and has been last updated on March 6, 2023. However, the data used in this analysis was filtered to only include data collected from January 2018 until March 6, 2023. This means there are 1289153 observations in my dataset. In addition, there are 12 parameters in the dataset: 'UsageClass', 'CheckoutType', 'MaterialType', 'CheckoutYear', 'CheckoutMonth', 'Checkouts', 'Title', 'ISBN', 'Creator', 'Subjects', 'Publisher', and 'PublicationYear'. The data was collected and provided by Seattle Public Library, probably by taking count of all checkouts made. There are many reasons why this data could have been collected. First and most obvious reason for this data collection was to keep track of the items that are being checked out. Furthermore, the library can use it to look for the most popular titles and make sure there is enough stock of them. 
+
+The ethical questions one should consider when working with this data is whether there is any sensitive and private information included. Furthermore, the dataset might contain some limitations such as biases in the books the library offers. What this means is when we analyse the data to look for example for popularity of book titles we should take into account the fact that it might not reflect the actual popularity of a title or the general public's interests because the quantity of books at a library is limited. Furthermore, there could be a bias in what books are available in the library which might reflect on the quality of the data.
 
 
 ### First Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+The chart below shows the total checkouts per year. They are divided into the two different item types: digital and physical. We can see that from 2018 digital ebooks have started to become more popular, while the physical ones started slowly decreasing in 2-18 with a very strong drop in 2019. this might have been caused by the covid pandemic and lockdown. Furthermore, this could suggest the rapid increase in the number of digital items being checked out from 2019. We can also see that in 2020 after the pandemic has slowed down and lockdown restrictions have been lifted, the total checkouts of physical books has again increased. However, we can see that from 2022 the total number of checkouts has decreased both for digital and physical items.
 
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+``````{r, echo = FALSE, message=FALSE}
+source("chart1_example.R")
+chart1
 ```
 
 ### Second Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+The chart below shows the total checkouts per year for 6 popular titles. It includes titles that were described in the summary information section above. We can see the most popular title 'Becoming' reaching its popularity peak in 2019 and then deacreasing. The primary reason of showing this graph is to see how the number of total checkouts of books regarding race that became popular after the lockdown changes over time. We can see that the 3 popular books regarding race had their peak in 2020 which is when the Black Lives Movement became increasingly popular in the media. Furthermore, the book titled 'Me and White Supremacy: Combat Racism, Change the World, and Become a Good Ancestor' has no data before 2020 suggesting it was not popular or was not published yet. We can also see that a year later its popularity decreased. This was also the case for all other titles. Overall, we can see there is a similar trend in the number of checkouts of books that were the most popular.
 
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+``````{r, echo = FALSE, message=FALSE}
+source("chart2_example.R")
+chart2
 ```
 
 ### Your Choice
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
+The last chart shows the total checkouts by month and item type in 2020. We can see that for physical items the number of otal checkouts started decreasing from January 2020 and there were no checkouts from April until July. This suggests that either the data is missing for those months or the lack of physical books checkouts is caused by lockdown. We can see that in August the number of physical checkouts started to increase. On the other hand when we look at the number of digital checkouts we can see that they started to increase from March and from May were pretty stable with some fluctuations. We can also see that physical books were more popular before lockdown and that the digital ones only slightly increased their popularity.
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+``````{r, echo = FALSE, message=FALSE}
+source("chart_3.R")
+chart3
 ```
 
 
